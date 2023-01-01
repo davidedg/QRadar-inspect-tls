@@ -17,7 +17,7 @@ For the impatient, here are some screenshots of the results:
 ## Interception Topology
 We are using iptables rules in the **NAT PREROUTING** chain to divert incoming traffic to pass through mitmproxy.
 \
-The clients that will be affected can be selected with propter iptables filters.
+Affected clients can be limited with proper iptables filters.
 
 ![topology](./mitm-topology.png)
 
@@ -78,7 +78,7 @@ Here we will set some bash variables to more easily configure the environment an
 ## MITMWEB - mitmproxy web interface
 MITMWEB is a web interface for mitmproxy and will listen on port `MITMWEBPORT` of IP `MITMWEBHOST`
 \
-It is optional (we can either use mitmweb or mitmproxy or mitmdump, depending on the needs).
+It is optional (we can either use mitmweb or mitmproxy or mitmdump, depending on our needs).
 
 #### MITMWEB WEB INTERFACE IPTABLES RULE:
 To be able to connect to its web interface, we need to allow its port in iptables `INPUT` chain:
