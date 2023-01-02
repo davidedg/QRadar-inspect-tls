@@ -5,6 +5,9 @@ This repo contains instructions on how to configure [mitmproxy](https://mitmprox
 
 Some script are also provided to easily extract WinCollect/SEC tokens.
 
+*Note: If you just need to see existing tokens defined in QRadar, check out: [AuthorizedServiceToken_Recovery](https://github.com/davidedg/QRadar-notes/tree/main/AuthorizedServiceToken_Recovery)*
+
+
 
 ## TL;DR - What can I achieve with these instructions?
 For the impatient, here are some screenshots of the results:
