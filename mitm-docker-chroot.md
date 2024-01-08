@@ -4,7 +4,7 @@ On a temporary Linux machine (Ubuntu latest will do fine):
 
     docker pull mitmproxy/mitmproxy
     docker run --entrypoint /bin/true --name mitmproxy_export mitmproxy/mitmproxy
-    docker export mitmproxy/mitmproxy > mitmproxy.tar
+    docker export mitmproxy_export > mitmproxy.tar
     docker rm mitmproxy_export
 
 Use `scp` to transfer `mitmproxy.tar` to QRadar host and then unpack it in `~/mitmproxy`
