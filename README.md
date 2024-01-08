@@ -41,12 +41,12 @@ See [mitm-venv.md](./mitm-venv.md) for some directions (not really tested - this
 \
 Check https certificate is correct (sha signatures must match):
 
-    openssl rsa -inform der -in /etc/httpd/conf/certs/cert.key -outform pem | openssl rsa -noout -modulus | openssl sha
+    openssl rsa -in /etc/httpd/conf/certs/cert.key | openssl rsa -noout -modulus | openssl sha
     openssl x509 -noout -modulus -in /etc/httpd/conf/certs/cert.cert | openssl sha
 
 Then create the certificate in mitmproxy format:
 
-    openssl rsa -inform der -in /etc/httpd/conf/certs/cert.key -outform pem | cat - /etc/httpd/conf/certs/cert.cert > ~/mitmproxy/https.pem
+    openssl rsa -in /etc/httpd/conf/certs/cert.key -outform pem | cat - /etc/httpd/conf/certs/cert.cert > ~/mitmproxy/https.pem
 
 
 ### Prepare certificate for TLS Syslog (WinCollect managed agents):
@@ -54,11 +54,11 @@ Then create the certificate in mitmproxy format:
 Check certificate is correct (sha signatures must match):
 
     openssl x509 -noout -modulus -in /opt/qradar/conf/trusted_certificates/syslog-tls.cert | openssl sha
-    openssl rsa -noout -modulus -in /opt/qradar/conf/trusted_certificates/syslog-tls.key | openssl sha
+    openssl rsa -noout -modulus -in /opt/qradar/conf/keys/syslog-tls.key | openssl sha
 
 Then create the certificate in mitmproxy format:
 
-    cat /opt/qradar/conf/trusted_certificates/syslog-tls.key /opt/qradar/conf/trusted_certificates/syslog-tls.cert > ~/mitmproxy/syslog-tls.pem
+    cat /opt/qradar/conf/keys/syslog-tls.key /opt/qradar/conf/trusted_certificates/syslog-tls.cert > ~/mitmproxy/syslog-tls.pem
 
 
 ## Global Configuration Variables
@@ -127,6 +127,8 @@ num   pkts bytes target     prot opt in     out     source               destina
 
     IPTRULE_TO_DELETE=$(iptables -n -L INPUT -v --line-numbers | grep -e "dpt:${MITM_PORT_WCOLLECTCFG}$" | cut -d' ' -f1) ; IPTRULE_TO_DELETE=( $IPTRULE_TO_DELETE ) ; IPTRULE_TO_DELETE=${IPTRULE_TO_DELETE[0]} ; echo IPTRULE_TO_DELETE=$IPTRULE_TO_DELETE
     [[ $IPTRULE_TO_DELETE -ge 1 ]] && echo removing iptable rule && iptables -D INPUT $IPTRULE_TO_DELETE ; unset IPTRULE_TO_DELETE
+
+or simply run `/opt/qradar/bin/iptables_update.pl` to reset to the running config
 
 \
 Now we can run the mitm server in a dedicated screen console.
